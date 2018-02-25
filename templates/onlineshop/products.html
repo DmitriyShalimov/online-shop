@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+    <title>online-shop</title>
+    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/online-shop">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/online-shop/addNewProduct">Add new product</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br><br>
+<main role="main">
+    <div class="container">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+            <div class="tracks-table">
+                <table class="table" id="products-list">
+                    <td>
+                        <h3>id</h3>
+                    </td>
+                    <td>
+                        <h3>title</h3>
+                    </td>
+                    <td>
+                        <h3>price</h3>
+                    </td>
+                    <td>
+                        <h3>description</h3>
+                    </td>
+                </table>
+            </div>
+            <template id="product-tpl">
+                <tr class="mess-hide">
+                    <td>
+                        <h4>{id}</h4>
+                    </td>
+                    <td>
+                        <h4>{title}</h4>
+                    </td>
+                    <td>
+                        <h4>{price}</h4>
+                    </td>
+                    <td>
+                        <h4>{description}</h4>
+                    </td>
+                </tr>
+            </template>
+        </div>
+    </div>
+</main>
+<footer class="container">
+    <p>&copy; Online-shop Company </p>
+</footer>
+<script>
+    var products = ${products}
+        products.forEach(function (product) {
+            var renderedRow = render('product-tpl', product.product);
+            document.getElementById('products-list').appendChild(renderedRow);
+        });
+
+    function render(id, data) {
+        var element = document.getElementById(id);
+        var templateHtml = element.innerHTML;
+        for (var i in data) {
+            var replace = new RegExp('{' + i + '}', 'g');
+            templateHtml = templateHtml.replace(replace, data[i]);
+        }
+        return parseHTML(templateHtml);
+    }
+
+
+    function parseHTML(html) {
+        var template = document.createElement('template');
+        template.innerHTML = html;
+        return template.content.cloneNode(true);
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+<script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

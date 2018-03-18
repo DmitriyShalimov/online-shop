@@ -1,6 +1,6 @@
-package onlineshop.service;
+package com.shalimov.onlineshop.service;
 
-import onlineshop.entity.Product;
+import com.shalimov.onlineshop.entity.Product;
 
 import java.util.List;
 

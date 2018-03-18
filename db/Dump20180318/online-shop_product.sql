@@ -28,7 +28,7 @@ CREATE TABLE `product` (
   `price` decimal(7,2) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (13,'Samsung Galaxy S8',18000.00,'Samsung Galaxy S8 Android smartphone. Announced Mar 2017. Features 5.8&#8243; Super AMOLED display, Exynos 8895 Octa chipset, 12 MP primary camera, 8 MP front camera, 3000 mAh battery, 64 GB storage, 4 GB RAM, IP68 certified, Corning Gorilla Glass 5.'),(14,'Samsung Galaxy S7',17000.00,'Samsung Galaxy S7 Android smartphone. Announced Feb 2016. Features 5.1&#8243; Super AMOLED display, Exynos 8890 Octa chipset, 12 MP primary camera, 5 MP front camera, 3000 mAh battery, 64 GB storage, 4 GB RAM, IP68 certified, Corning Gorilla Glass 4.'),(15,'Samsung Galaxy S6',15000.00,'Samsung Galaxy S6 Android smartphone. Announced Mar 2015. Features 5.1&#8243; Super AMOLED display, Exynos 7420 Octa chipset, 16 MP primary camera, 5 MP front camera, 2550 mAh battery, 128 GB storage, 3 GB RAM, Corning Gorilla Glass 4.'),(16,'Samsung Galaxy S6 Silver',15000.00,'Samsung Galaxy S6 Android smartphone. Announced Mar 2015. Features 5.1&#8243; Super AMOLED display, Exynos 7420 Octa chipset, 16 MP primary camera, 5 MP front camera, 2550 mAh battery, 128 GB storage, 3 GB RAM, Corning Gorilla Glass 4.'),(17,'iPhone 8',25000.00,'Apple iPhone 8 smartphone. Announced Sep 2017. Features 4.7&#8243; LED-backlit IPS LCD display, Apple A11 Bionic chipset, 12 MP primary camera, 7 MP front camera, 1821 mAh battery, 256 GB storage, 2 GB RAM, IP67 certified, Ion-strengthened glass.');
+INSERT INTO `product` VALUES (13,'Samsung Galaxy S8',18000.00,'Samsung Galaxy S8 Android smartphone. Announced Mar 2017. Features 5.8&#8243; Super AMOLED display, Exynos 8895 Octa chipset, 12 MP primary camera, 8 MP front camera, 3000 mAh battery, 64 GB storage, 4 GB RAM, IP68 certified, Corning Gorilla Glass 5.'),(14,'Samsung Galaxy S7',17000.00,'Samsung Galaxy S7 Android smartphone. Announced Feb 2016. Features 5.1&#8243; Super AMOLED display, Exynos 8890 Octa chipset, 12 MP primary camera, 5 MP front camera, 3000 mAh battery, 64 GB storage, 4 GB RAM, IP68 certified, Corning Gorilla Glass 4.'),(15,'Samsung Galaxy S6',15000.00,'Samsung Galaxy S6 Android smartphone. Announced Mar 2015. Features 5.1&#8243; Super AMOLED display, Exynos 7420 Octa chipset, 16 MP primary camera, 5 MP front camera, 2550 mAh battery, 128 GB storage, 3 GB RAM, Corning Gorilla Glass 4.'),(16,'Samsung Galaxy S6 Silver',15000.00,'Samsung Galaxy S6 Android smartphone. Announced Mar 2015. Features 5.1&#8243; Super AMOLED display, Exynos 7420 Octa chipset, 16 MP primary camera, 5 MP front camera, 2550 mAh battery, 128 GB storage, 3 GB RAM, Corning Gorilla Glass 4.'),(17,'iPhone 8',25000.00,'Apple iPhone 8 smartphone. Announced Sep 2017. Features 4.7&#8243; LED-backlit IPS LCD display, Apple A11 Bionic chipset, 12 MP primary camera, 7 MP front camera, 1821 mAh battery, 256 GB storage, 2 GB RAM, IP67 certified, Ion-strengthened glass.'),(18,'1',1.00,'1');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-25 23:48:22
+-- Dump completed on 2018-03-18 21:04:24

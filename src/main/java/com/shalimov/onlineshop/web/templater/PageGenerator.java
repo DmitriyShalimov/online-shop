@@ -1,4 +1,5 @@
-package onlineshop.util;
+package com.shalimov.onlineshop.web.templater;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -32,7 +33,8 @@ public class PageGenerator {
         }
         return stream.toString();
     }
-    private PageGenerator(){
-        configuration=new Configuration();
+
+    private PageGenerator() {
+        configuration = new Configuration();
     }
 }

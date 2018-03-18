@@ -1,4 +1,4 @@
-package onlineshop.entity;
+package com.shalimov.onlineshop.entity;
 
 public class Product {
     private int id;

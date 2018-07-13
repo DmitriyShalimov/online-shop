@@ -6,7 +6,7 @@ import com.shalimov.onlineshop.entity.User;
 import java.util.List;
 
 public interface UserDao {
-    List<User> getUsers();
+    List<User> getAll();
 
-    void addUser(User user);
+    void add(User user);
 }

@@ -5,76 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="">
     <title>online-shop</title>
-    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+    <#include "onlineshop/css/styles.css">
+    <#include "onlineshop/css/bootstrap.min.css">
+    </style>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/products">Home</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/products/add">Add new product</a>
-            </li>
-            <#if login??>
-                <li><a class="nav-link" href="/logout">logout</a></li>
-                <#else>
-                    <li><a class="nav-link" href="/login">Login</a></li>
-                    <li><a class="nav-link" href="/registration">Registration</a></li>
-            </#if>
-        </ul>
+<header>
+    <nav id="header-nav" class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="index.html" class="pull-left visible-md visible-lg">
+                    <div id="logo-img"></div>
+                </a>
+
+                <div class="navbar-brand">
+                    <a href="/products"><h1>Shalimov shop</h1></a>
+                </div>
+
+                <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#collapsable-nav" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div id="collapsable-nav" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/products">Home</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/products/add">Add new product</a>
+                        </li>
+                        <#if login??>
+                        <li><a class="nav-link" href="/logout">logout</a></li>
+                        <#else>
+                        <li><a class="nav-link" href="/login">Login</a></li>
+                        <li><a class="nav-link" href="/registration">Registration</a></li>
+                    </#if>
+
+                </ul><!-- #nav-list -->
+            </div><!-- .collapse .navbar-collapse -->
+        </div><!-- .container -->
+    </nav><!-- #header-nav -->
+</header>
+
+
+
+
+<div id="main-content" class="container">
+    <h2 id="menu-categories-title" class="text-center">Menu Categories</h2>
+    <div class="text-center">
+        Substituting white rice with brown rice or fried rice after 3:00pm will be $1.50 for a pint and $2.50 for a quart.
     </div>
-</nav>
-<br><br>
-<main role="main">
+
+    <section class="row">
+        <#list products as product>
+        <div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">
+                <div class="category-tile">
+                    <img width="200" height="200" src="http://krasivie-avatarki.ru/images/200x200/2-znak-in-yan-s-zelenym-otbleskom.jpg">
+                    <span>${product.title}</span>
+                    <span>${product.price}</span>
+                </div>
+        </div>
+    </#list>
+    </section>
+
+</div><!-- End of #main-content -->
+
+<footer class="panel-footer">
     <div class="container">
-        <div class="col-md-1">
+        <div class="row">
+            <section id="hours" class="col-sm-4">
+                <span>Hours:</span><br>
+                Sun-Thurs: 11:15am - 10:00pm<br>
+                Fri: 11:15am - 2:30pm<br>
+                Saturday Closed
+                <hr class="visible-xs">
+            </section>
+            <section id="address" class="col-sm-4">
+                <span>Address:</span><br>
+                7105 Reisterstown Road<br>
+                Baltimore, MD 21215
+                <p>* Delivery area within 3-4 miles, with minimum order of $20 plus $3 charge for all deliveries.</p>
+                <hr class="visible-xs">
+            </section>
+            <section id="testimonials" class="col-sm-4">
+                <p>"The best Chinese restaurant I've been to! And that's saying a lot, since I've been to many!"</p>
+                <p>"Amazing food! Great service! Couldn't ask for more! I'll be back again and again!"</p>
+            </section>
         </div>
-        <div class="col-md-10">
-            <table class="table" id="products-list">
-                <tr>
-                    <td>
-                        <h3>id</h3>
-                    </td>
-                    <td>
-                        <h3>title</h3>
-                    </td>
-                    <td>
-                        <h3>price</h3>
-                    </td>
-                    <td>
-                        <h3>description</h3>
-                    </td>
-                </tr>
-                <#list products as product>
-                    <tr class="mess-hide">
-                        <td>
-                            <h4>${product.id}</h4>
-                        </td>
-                        <td>
-                            <h4>${product.title}</h4>
-                        </td>
-                        <td>
-                            <h4>${product.price}</h4>
-                        </td>
-                        <td>
-                            <h4>${product.description}</h4>
-                        </td>
-                    </tr>
-                </#list>
-            </table>
-        </div>
+        <div class="text-center">&copy; Copyright David Chu's China Bistro 2016</div>
     </div>
-</main>
-<footer class="container">
-    <p>&copy; Online-shop Company </p>
 </footer>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+<script>
+    <#include "onlineshop/js/jquery-2.1.4.min.js">
+</script>
+<script>
+    <#include "onlineshop/js/bootstrap.min.js">
+</script>
+
 </body>
 </html>

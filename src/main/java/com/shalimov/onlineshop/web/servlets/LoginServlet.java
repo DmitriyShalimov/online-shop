@@ -3,32 +3,32 @@ package com.shalimov.onlineshop.web.servlets;
 import com.shalimov.onlineshop.entity.User;
 import com.shalimov.onlineshop.security.Session;
 import com.shalimov.onlineshop.security.SecurityService;
-import com.shalimov.onlineshop.service.ServiceLocator;
 import com.shalimov.onlineshop.service.UserService;
 import com.shalimov.onlineshop.web.templater.PageGenerator;
+import ua.shalimov.ioc.context.ApplicationContext;
+import ua.shalimov.ioc.context.ClassPathApplicationContext;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.UUID;
 
 public class LoginServlet extends HttpServlet {
-    private UserService userService = ServiceLocator.getService(UserService.class);
-    private SecurityService securityService = ServiceLocator.getService(SecurityService.class);
+    private ApplicationContext applicationContext = new ClassPathApplicationContext("src/main/resources/context.xml");
+    private UserService userService = (UserService) applicationContext.getBean("userService");
+    private SecurityService securityService = (SecurityService) applicationContext.getBean("securityService");
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String page = PageGenerator.instance().getPage("login.html", new HashMap<>());
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
+        String page = PageGenerator.instance().getPage("login.html");
         response.getWriter().write(page);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         User user = userService.authenticate(name, password);

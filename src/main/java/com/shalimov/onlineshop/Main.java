@@ -1,38 +1,35 @@
 package com.shalimov.onlineshop;
 
-import com.shalimov.onlineshop.dao.JDBCProductDao;
-import com.shalimov.onlineshop.dao.JDBCUserDao;
-import com.shalimov.onlineshop.dao.ProductDao;
-import com.shalimov.onlineshop.dao.UserDao;
-import com.shalimov.onlineshop.security.SecurityService;
-import com.shalimov.onlineshop.service.*;
-import com.shalimov.onlineshop.security.SecurityFilter;
+import com.shalimov.onlineshop.web.security.SecurityFilter;
 import com.shalimov.onlineshop.web.servlets.*;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-
 import javax.servlet.DispatcherType;
 import java.util.EnumSet;
 
+
 public class Main {
     public static void main(String[] args) throws Exception {
-        //dao
-        ServiceLocator.registerService(ProductDao.class, new JDBCProductDao());
-        ServiceLocator.registerService(UserDao.class, new JDBCUserDao());
+//        //db
+//        Properties properties = new Properties();
+//        properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("DAO.properties"));
+//        MysqlDataSource mysqlDataSource = new MysqlDataSource();
+//        mysqlDataSource.setURL(properties.getProperty("url"));
+//        mysqlDataSource.setPassword(properties.getProperty("password"));
+//        mysqlDataSource.setUser(properties.getProperty("username"));
 
-        //services
-        ServiceLocator.registerService(ProductService.class, new ProductServiceImpl());
-        ServiceLocator.registerService(UserService.class, new UserServiceImpl());
-        ServiceLocator.registerService(SecurityService.class, new SecurityService());
+
+
+
 
         //web
         ProductsServlet productsServlet = new ProductsServlet();
         AddNewProductServlet addNewProductServlet = new AddNewProductServlet();
         LoginServlet loginServlet = new LoginServlet();
         LogoutServlet logoutServlet = new LogoutServlet();
-        RegistrationServlet registrationServlet=new RegistrationServlet();
+        RegistrationServlet registrationServlet = new RegistrationServlet();
 
         SecurityFilter securityFilter = new SecurityFilter();
 
@@ -46,8 +43,7 @@ public class Main {
 
         EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST);
 
-        context.addFilter(new FilterHolder(securityFilter), "/*", dispatcherTypes);
-
+        context.addFilter(new FilterHolder(securityFilter), "/products/add", dispatcherTypes);
 
         //server config
         Server server = new Server(8080);

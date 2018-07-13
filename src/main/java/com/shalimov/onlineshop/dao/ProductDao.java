@@ -2,10 +2,11 @@ package com.shalimov.onlineshop.dao;
 
 import com.shalimov.onlineshop.entity.Product;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ProductDao {
-    List<Product> getProducts();
+    List<Product> getAll();
 
-    void addProduct(Product product);
+    void add(Product product) ;
 }

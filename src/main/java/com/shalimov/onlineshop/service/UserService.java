@@ -5,5 +5,5 @@ import com.shalimov.onlineshop.entity.User;
 public interface UserService {
     User authenticate(String name, String password);
 
-    void addUser(User user);
+    void add(User user);
 }

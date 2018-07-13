@@ -9,7 +9,6 @@ public class User {
     }
 
     public User(String login, String password) {
-        this.id = id;
         this.login = login;
         this.password = password;
     }
@@ -39,7 +38,6 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 

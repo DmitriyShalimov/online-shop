@@ -5,6 +5,6 @@ import com.shalimov.onlineshop.entity.Product;
 import java.util.List;
 
 public interface ProductService {
-    List<Product> getProducts();
-    void addProduct(Product product);
+    List<Product> getAll();
+    void add(Product product);
 }

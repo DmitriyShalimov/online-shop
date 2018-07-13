@@ -1,10 +1,11 @@
 //package com.shalimov.onlineshop.dao;
 //
-//import com.shalimov.onlineshop.dao.jdbc.mapper.UserRowMapper;
-//import com.shalimov.onlineshop.entity.User;
+//import com.shalimov.onlineshop.dao.jdbc.mapper.ProductRowMapper;
+//import com.shalimov.onlineshop.entity.Product;
 //import org.junit.Before;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
+//
 //import org.mockito.Matchers;
 //import org.mockito.Mockito;
 //import org.powermock.api.mockito.PowerMockito;
@@ -20,54 +21,56 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//import static org.junit.Assert.*;
 //import static org.mockito.Mockito.times;
 //import static org.mockito.Mockito.verify;
 //
+//
+//import static org.junit.Assert.assertEquals;
+//
 //@RunWith(PowerMockRunner.class)
-//@PrepareForTest({DriverManager.class, JdbcUserDao.class})
-//public class JDBCUserDaoTest {
+//@PrepareForTest({DriverManager.class, JdbcProductDao.class})
+//public class JdbcProductDaoTest {
 //    private Connection connection;
-//    private UserRowMapper mapper;
+//    private ProductRowMapper mapper;
 //
 //    @Before
 //    public void setUp() throws Exception {
 //        PowerMockito.mockStatic(DriverManager.class);
 //        connection = Mockito.mock(Connection.class);
 //        PowerMockito.when(DriverManager.getConnection(Matchers.anyString(), Matchers.anyString(), Matchers.anyString())).thenReturn(connection);
-//        mapper = Mockito.mock(UserRowMapper.class);
-//        PowerMockito.whenNew(UserRowMapper.class).withNoArguments().thenReturn(mapper);
+//        mapper = Mockito.mock(ProductRowMapper.class);
+//        PowerMockito.whenNew(ProductRowMapper.class).withNoArguments().thenReturn(mapper);
 //    }
 //
 //    @Test
-//    public void getUsers() throws SQLException {
+//    public void getProducts() throws SQLException {
 //        //    before
 //        Statement statement = Mockito.mock(Statement.class);
 //        Mockito.when(connection.createStatement()).thenReturn(statement);
-//        Mockito.when(statement.execute("SELECT u.id, u.login, u.password FROM user AS u")).thenReturn(true);
+//        Mockito.when(statement.execute("SELECT p.id, p.title, p.Price, p.description FROM product AS p")).thenReturn(true);
 //        ResultSet resultSet = Mockito.mock(ResultSet.class);
 //        Mockito.when(statement.getResultSet()).thenReturn(resultSet);
-//        List<User> users = new ArrayList<>();
-//        User user = new User();
-//        users.add(user);
-//        Mockito.when(mapper.getUsers(resultSet)).thenReturn(users);
+//        List<Product> products = new ArrayList<>();
+//        Product product=new Product();
+//        products.add(product);
+//        Mockito.when(mapper.getProducts(resultSet)).thenReturn(products);
 //
 //        //when
-//        JdbcUserDao userDao = new JdbcUserDao();
+//        JdbcProductDao productDao=new JdbcProductDao();
 //
 //        //then
-//        assertEquals(users, userDao.getUsers());
+//        assertEquals(products, productDao.getProducts());
 //    }
 //
 //    @Test
-//    public void addUser() throws SQLException {
+//    public void addProduct() throws SQLException {
 //        PreparedStatement statement = Mockito.mock(PreparedStatement.class);
-//        Mockito.when(connection.prepareStatement("INSERT INTO user (login,password) VALUES(?,?);")).thenReturn(statement);
-//        User user = new User();
+//        Mockito.when(connection.prepareStatement("INSERT INTO product (title,description,price) VALUES(?,?,?);")).thenReturn(statement);
+//        Product product=new Product();
 //
 //        //when
-//        JdbcUserDao userDao = new JdbcUserDao();
-//        userDao.addUser(user);
+//        JdbcProductDao productDao=new JdbcProductDao();
+//        productDao.addProduct(product);
 //
 //        //then
 //        verify(statement, times(1)).executeUpdate();

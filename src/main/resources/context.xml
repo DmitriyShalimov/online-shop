@@ -1,0 +1,29 @@
+<beans>
+
+
+
+    <bean id="dataSource" class="com.mysql.cj.jdbc.MysqlDataSource">
+        <property name="password" value="root"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/online-shop?autoReconnect=true"/>
+        <property name="user" value="root"/>
+    </bean>
+
+    <bean id="productDao" class="com.shalimov.onlineshop.dao.jdbc.JdbcProductDao">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="userDao" class="com.shalimov.onlineshop.dao.jdbc.JdbcUserDao">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="securityService" class="com.shalimov.onlineshop.security.SecurityService">
+    </bean>
+    <bean id="productService" class="com.shalimov.onlineshop.service.impl.DefaultProductService">
+        <property name="productDao" ref="productDao"/>
+    </bean>
+    <bean id="userService" class="com.shalimov.onlineshop.service.impl.DefaultUserService">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+
+</beans>

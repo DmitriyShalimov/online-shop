@@ -2,10 +2,11 @@ package com.shalimov.onlineshop.web.servlets;
 
 import com.shalimov.onlineshop.security.Session;
 import com.shalimov.onlineshop.security.SecurityService;
-import com.shalimov.onlineshop.service.ServiceLocator;
 import com.shalimov.onlineshop.web.templater.PageGenerator;
 import com.shalimov.onlineshop.entity.Product;
 import com.shalimov.onlineshop.service.ProductService;
+import ua.shalimov.ioc.context.ApplicationContext;
+import ua.shalimov.ioc.context.ClassPathApplicationContext;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -17,17 +18,20 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductsServlet extends HttpServlet {
-    private ProductService service = ServiceLocator.getService(ProductService.class);
-    private SecurityService securityService = ServiceLocator.getService(SecurityService.class);
+    private ApplicationContext applicationContext = new ClassPathApplicationContext("src/main/resources/context.xml");
+
+    private SecurityService securityService = (SecurityService) applicationContext.getBean("securityService");
+    private ProductService productService= (ProductService) applicationContext.getBean("productService");
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<Product> list = service.getProducts();
+        List<Product> list = productService.getAll();
         Map<String, Object> pageVariables = new HashMap<>();
         pageVariables.put("products", list);
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
-                if (cookie.getName().equals("user-token")) {
+                if ("user-token".equals(cookie.getName())) {
                     Session session = securityService.getSession(cookie.getValue());
                     if (session != null) {
                         String login = session.getUser().getLogin();

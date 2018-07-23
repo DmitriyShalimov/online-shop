@@ -5,111 +5,298 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="">
     <title>online-shop</title>
-    <style type="text/css">
-    <#include "onlineshop/css/styles.css">
-    <#include "onlineshop/css/bootstrap.min.css">
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
+          integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+
     <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <style type="text/css">
+        body {
+            font-size: 16px;
+            color: #fff;
+            background-color: #61122f;
+            font-family: 'Oxygen', sans-serif;
+        }
+
+        /*Header*/
+        #header-nav {
+            background-color: #f6b319;
+            border-radius: 0;
+            border: 0;
+        }
+
+        #navbarSupportedContent {
+            background-color: #f6b319;
+        }
+
+        #menu {
+            padding: 0;
+        }
+
+        #logo-img {
+            background: url("http://erundit.ru/avatar/150/245.gif") no-repeat;
+            width: 150px;
+            height: 150px;
+            margin: 10px 15px 10px 0;
+        }
+
+        .navbar-brand {
+            padding-top: 25px;
+        }
+
+        .navbar-toggler {
+
+            background-color: #f6b319;
+            border: 1px solid #61122f;
+
+        }
+
+        .navbar-brand h1 {
+            font-family: 'Lora', serif;
+            color: #557ce3;
+            font-size: 2em;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px #222;
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: .75;
+        }
+
+        .navbar-brand a:hover, .navbar-brand a:focus {
+            text-decoration: none;
+        }
+
+        .nav-item a {
+            margin-top: 10px;
+            margin-left: 10px;
+            text-align: center;
+            color: #61122f;
+            text-decoration: none;
+        }
+
+        /*main content*/
+        .phone-tile {
+            position: relative;
+            border: 3px solid #61122f;
+            overflow: hidden;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 15px;
+        }
+
+        .phone-tile span {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            background-color: #000;
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        .phone-tile:hover {
+            box-shadow: 0 1px 5px 1px #cccccc;
+        }
+
+        .phone-tile div {
+            position: absolute;
+            text-align: center;
+            background-color: #557ce3;
+            width: 80px;
+            left: 0;
+        }
+
+        /*Footer*/
+        .panel-footer {
+            margin-top: 30px;
+            padding-top: 35px;
+            padding-bottom: 30px;
+            background-color: #222;
+            border-top: 0;
+        }
+
+        /*Footer*/
+        .modal-header {
+            background-color: #f6b319;
+        }
+
+        .modal-body {
+            background-color: #61122f;
+        }
+
+        .modal-footer {
+            background-color: #222;
+        }
+    </style>
 </head>
 <body>
 <header>
     <nav id="header-nav" class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <a href="index.html" class="pull-left visible-md visible-lg">
-                    <div id="logo-img"></div>
+                <a href="/products" class="float-left  d-none d-md-block">
+                    <div id="logo-img" alt="Logo image"></div>
                 </a>
-
                 <div class="navbar-brand">
-                    <a href="/products"><h1>Shalimov shop</h1></a>
+                    <a href="/products"><H1>Bananaphone</H1></a>
                 </div>
-
-                <button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#collapsable-nav" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
             </div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div id="collapsable-nav" class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/products">Home</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/products/add">Add new product</a>
-                        </li>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
                         <#if login??>
-                        <li><a class="nav-link" href="/logout">logout</a></li>
+                        <li class="nav-item">
+                            <a data-toggle="modal" href="#addNewProduct" data-target="#addNewProduct">Add new
+                                product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/products">Cart</a>
+                        </li>
+                        <li class="nav-item"><a href="/logout">Log out</a></li>
                         <#else>
-                        <li><a class="nav-link" href="/login">Login</a></li>
-                        <li><a class="nav-link" href="/registration">Registration</a></li>
+                        <li class="nav-item">
+                            <a data-toggle="modal" href="#signIn" data-target="#signIn">Sign in/ Sign up</a>
+                        </li>
                     </#if>
 
-                </ul><!-- #nav-list -->
-            </div><!-- .collapse .navbar-collapse -->
+                    </ul>
+
+                </div>
+            </nav>
         </div><!-- .container -->
     </nav><!-- #header-nav -->
 </header>
 
-
-
-
+<!--main-content-->
 <div id="main-content" class="container">
-    <h2 id="menu-categories-title" class="text-center">Menu Categories</h2>
-    <div class="text-center">
-        Substituting white rice with brown rice or fried rice after 3:00pm will be $1.50 for a pint and $2.50 for a quart.
-    </div>
-
+    <h2 id="phone-models-title" class="text-center">Models</h2>
     <section class="row">
         <#list products as product>
-        <div class="col-md-3 col-sm-4 col-xs-6 col-xxs-12">
-                <div class="category-tile">
-                    <img width="200" height="200" src="http://krasivie-avatarki.ru/images/200x200/2-znak-in-yan-s-zelenym-otbleskom.jpg">
-                    <span>${product.title}</span>
-                    <span>${product.price}</span>
-                </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
+            <div class="phone-tile">
+                <div>${product.price}</div>
+                <img width="200" height="200" src=${product.image}>
+                <span>${product.title}</span>
+
+            </div>
         </div>
     </#list>
     </section>
 
 </div><!-- End of #main-content -->
 
+<!--Footer-->
 <footer class="panel-footer">
-    <div class="container">
-        <div class="row">
-            <section id="hours" class="col-sm-4">
-                <span>Hours:</span><br>
-                Sun-Thurs: 11:15am - 10:00pm<br>
-                Fri: 11:15am - 2:30pm<br>
-                Saturday Closed
-                <hr class="visible-xs">
-            </section>
-            <section id="address" class="col-sm-4">
-                <span>Address:</span><br>
-                7105 Reisterstown Road<br>
-                Baltimore, MD 21215
-                <p>* Delivery area within 3-4 miles, with minimum order of $20 plus $3 charge for all deliveries.</p>
-                <hr class="visible-xs">
-            </section>
-            <section id="testimonials" class="col-sm-4">
-                <p>"The best Chinese restaurant I've been to! And that's saying a lot, since I've been to many!"</p>
-                <p>"Amazing food! Great service! Couldn't ask for more! I'll be back again and again!"</p>
-            </section>
-        </div>
-        <div class="text-center">&copy; Copyright David Chu's China Bistro 2016</div>
+    <div style="text-align: center;" class="container">
+        <span>Bananaphone</span><br>
+        <span>All rights reserved</span>
     </div>
 </footer>
-<script>
-    <#include "onlineshop/js/jquery-2.1.4.min.js">
-</script>
-<script>
-    <#include "onlineshop/js/bootstrap.min.js">
-</script>
+<!--End of footer-->
 
+<!-- Sign in -->
+<div class="modal fade" id="signIn" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Entry</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/login" method="post">
+                    <input type="text" placeholder="name" required name="name" id="name"><br><br>
+                    <input type="password" placeholder="password" required name="password" id="password"><br><br>
+                    <button type="submit">Login</button>
+                </form>
+                <p>You are not registered yet?
+                </p>
+                <a data-toggle="modal" href="#signUp" data-target="#signUp" data-dismiss="modal">Registration</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sign up -->
+<div class="modal fade" id="signUp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registration</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/registration" method="post">
+                    <input type="text" placeholder="name" name="registrationName" id="registrationName"
+                           required><br><br>
+                    <input type="password" placeholder="password" name="registrationPassword" id="registrationPassword"
+                           required><br><br>
+                    <button type="submit">Registration</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Add new product -->
+<div class="modal fade" id="addNewProduct" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add new product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/products/add" method="post">
+                    <input type="text" placeholder="title" required name="title" id="title"><br><br>
+                    <input type="text" placeholder="description" required name="description" id="description"><br><br>
+                    <input type="number" placeholder="price" required name="price" id="price"><br><br>
+                    <input type="text" placeholder="image" name="image" id="image"><br><br>
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
+        integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -9,6 +9,7 @@ public class SecurityService {
     private List<Session> sessions = new ArrayList<>();
 
     public boolean isValid(Cookie cookie) {
+        Session sessionToDelete = null;
         for (Session session : sessions) {
             if (cookie.getValue().equals(session.getToken())) {
                 LocalDateTime expireTime = session.getExpireTime();
@@ -16,12 +17,13 @@ public class SecurityService {
                 if (!interval.isNegative()) {
                     return true;
                 } else {
-                    removeSession(cookie.getValue());
-// do remove
-                    return false;
+                    sessionToDelete = session;
+                    break;
                 }
             }
-
+        }
+        if (sessionToDelete != null) {
+            sessions.remove(sessionToDelete);
         }
         return false;
     }

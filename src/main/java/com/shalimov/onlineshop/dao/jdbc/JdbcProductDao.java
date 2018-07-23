@@ -5,6 +5,7 @@ import com.shalimov.onlineshop.dao.jdbc.mapper.ProductRowMapper;
 import com.shalimov.onlineshop.entity.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,13 +14,14 @@ import java.util.List;
 public class JdbcProductDao implements ProductDao {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private static final ProductRowMapper PRODUCT_ROW_MAPPER = new ProductRowMapper();
-    private static final String GET_ALL_PRODUCTS_SQL = "SELECT p.id, p.title, p.Price, p.description FROM product AS p";
-    private static final String ADD_NEW_PRODUCT_SQL = "INSERT INTO product (title,description,price) VALUES(?,?,?);";
-    private DataSource dataSource ;
+    private static final String GET_ALL_PRODUCTS_SQL = "SELECT p.id, p.title, p.Price, p.description,p.image FROM \"product\" AS p";
+    private static final String ADD_NEW_PRODUCT_SQL = "INSERT INTO \"product\" (title,description,price,image) VALUES(?,?,?,?);";
+    private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+
 
     public List<Product> getAll() {
         logger.info("start method getAll");
@@ -45,9 +47,10 @@ public class JdbcProductDao implements ProductDao {
             preparedStatement.setString(1, product.getTitle());
             preparedStatement.setString(2, product.getDescription());
             preparedStatement.setDouble(3, product.getPrice());
+            preparedStatement.setString(4, product.getImage());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("SQL exception while adding new product. [title={}], [description={}],[price={}]", product.getTitle(), product.getDescription(), product.getPrice(), e);
+            logger.error("SQL exception while adding new product. {}", product, e);
             throw new RuntimeException(e);
         }
     }

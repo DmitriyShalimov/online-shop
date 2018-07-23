@@ -3,8 +3,6 @@ package com.shalimov.onlineshop.service.impl;
 import com.shalimov.onlineshop.dao.ProductDao;
 import com.shalimov.onlineshop.entity.Product;
 import com.shalimov.onlineshop.service.ProductService;
-import ua.shalimov.ioc.context.ApplicationContext;
-import ua.shalimov.ioc.context.ClassPathApplicationContext;
 
 import java.util.List;
 

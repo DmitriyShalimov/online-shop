@@ -15,9 +15,9 @@ import java.util.List;
 public class JdbcUserDao implements UserDao {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private static final UserRowMapper USER_ROW_MAPPER = new UserRowMapper();
-    private static final String GET_ALL_USERS_SQL = "SELECT u.id, u.login, u.password FROM user AS u";
-    private static final String ADD_NEW_USER_SQL = "INSERT INTO user (login,password) VALUES(?,?);";
-    private DataSource dataSource ;
+    private static final String GET_ALL_USERS_SQL = "SELECT u.id, u.login, u.password FROM \"user\" AS u";
+    private static final String ADD_NEW_USER_SQL = "INSERT INTO \"user\" (login,password) VALUES(?,?);";
+    private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;

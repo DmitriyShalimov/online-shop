@@ -1,11 +1,8 @@
 <beans>
-
-
-
-    <bean id="dataSource" class="com.mysql.cj.jdbc.MysqlDataSource">
-        <property name="password" value="root"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/online-shop?autoReconnect=true"/>
-        <property name="user" value="root"/>
+    <bean id="dataSource" class="org.postgresql.jdbc2.optional.PoolingDataSource">
+        <property name="password" value="qwerty"/>
+        <property name="databaseName" value="online-shop"/>
+        <property name="user" value="postgres"/>
     </bean>
 
     <bean id="productDao" class="com.shalimov.onlineshop.dao.jdbc.JdbcProductDao">
@@ -18,12 +15,12 @@
 
     <bean id="securityService" class="com.shalimov.onlineshop.security.SecurityService">
     </bean>
+
     <bean id="productService" class="com.shalimov.onlineshop.service.impl.DefaultProductService">
         <property name="productDao" ref="productDao"/>
     </bean>
+
     <bean id="userService" class="com.shalimov.onlineshop.service.impl.DefaultUserService">
         <property name="userDao" ref="userDao"/>
     </bean>
-
-
 </beans>

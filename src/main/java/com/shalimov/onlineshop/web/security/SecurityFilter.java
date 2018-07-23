@@ -1,8 +1,7 @@
 package com.shalimov.onlineshop.web.security;
 
+import com.shalimov.onlineshop.util.Context;
 import com.shalimov.onlineshop.security.SecurityService;
-import ua.shalimov.ioc.context.ApplicationContext;
-import ua.shalimov.ioc.context.ClassPathApplicationContext;
 
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
@@ -11,12 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SecurityFilter implements Filter {
-
-    private ApplicationContext applicationContext = new ClassPathApplicationContext("src/main/resources/context.xml");
-    private SecurityService securityService= (SecurityService) applicationContext.getBean("securityService");
+    private SecurityService securityService = (SecurityService) Context.instance().getApplicationContext().getBean("securityService");
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
@@ -30,14 +27,11 @@ public class SecurityFilter implements Filter {
                     if (securityService.isValid(cookie)) {
                         isAuth = true;
                     } else {
-                        isAuth = false;
                         cookie = new Cookie("user-token", null);
                         cookie.setMaxAge(0);
                         httpServletResponse.addCookie(cookie);
                     }
-
                     break;
-                    //16 min add cookie
                 }
             }
         }

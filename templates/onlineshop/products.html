@@ -104,6 +104,7 @@
         }
 
         .phone-tile div {
+            padding: 0px;
             position: absolute;
             text-align: center;
             background-color: #557ce3;
@@ -185,7 +186,7 @@
         <#list products as product>
         <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
             <div class="phone-tile">
-                <div>${product.price}</div>
+                <div>$${product.price}</div>
                 <img width="200" height="200" src=${product.image}>
                 <span>${product.title}</span>
 

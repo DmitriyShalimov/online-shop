@@ -22,7 +22,6 @@ public class JdbcProductDao implements ProductDao {
         this.dataSource = dataSource;
     }
 
-
     public List<Product> getAll() {
         logger.info("start method getAll");
         try (Connection connection = dataSource.getConnection();

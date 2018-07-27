@@ -26,7 +26,7 @@
             border: 0;
         }
 
-        #navbarSupportedContent {
+        #navbarNav {
             background-color: #f6b319;
         }
 
@@ -148,14 +148,12 @@
                 </div>
             </div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu">
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
                         <#if login??>
                         <li class="nav-item">
                             <a data-toggle="modal" href="#addNewProduct" data-target="#addNewProduct">Add new

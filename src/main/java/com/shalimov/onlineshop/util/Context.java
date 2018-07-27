@@ -15,7 +15,7 @@ public class Context {
     }
 
     private Context() {
-        applicationContext = new ClassPathApplicationContext("src/main/resources/context.xml");
+        applicationContext = new ClassPathApplicationContext("context.xml");
     }
 
     public ApplicationContext getApplicationContext() {

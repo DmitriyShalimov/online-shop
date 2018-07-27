@@ -1,5 +1,6 @@
 package com.shalimov.onlineshop.web.templater;
 
+import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -25,7 +26,9 @@ public class PageGenerator {
     public String getPage(String filename, Map<String, Object> data) {
         Writer stream = new StringWriter();
         try {
-            Template template = configuration.getTemplate(HTML_DIR + filename);
+          ClassTemplateLoader templateLoader = new ClassTemplateLoader(getClass(), "/webapp");
+            configuration.setTemplateLoader(templateLoader);
+            Template template = configuration.getTemplate(filename);
             template.process(data, stream);
         } catch (IOException | TemplateException e) {
             throw new RuntimeException(e);

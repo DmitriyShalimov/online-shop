@@ -20,20 +20,11 @@
         }
 
         /*Header*/
-        #header-nav {
-            background-color: #f6b319;
-            border-radius: 0;
-            border: 0;
-        }
 
-        #navbarNav {
+       .navbar {
             background-color: #f6b319;
         }
-
-        #menu {
-            padding: 0;
-        }
-
+     
         #logo-img {
             background: url("http://erundit.ru/avatar/150/245.gif") no-repeat;
             width: 150px;
@@ -46,7 +37,6 @@
         }
 
         .navbar-toggler {
-
             background-color: #f6b319;
             border: 1px solid #61122f;
 
@@ -137,44 +127,41 @@
 </head>
 <body>
 <header>
-    <nav id="header-nav" class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="/products" class="float-left  d-none d-md-block">
-                    <div id="logo-img" alt="Logo image"></div>
-                </a>
-                <div class="navbar-brand">
-                    <a href="/products"><H1>Bananaphone</H1></a>
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="navbar-header">
+            <a href="/products" class="float-left  d-none d-md-block">
+                <div id="logo-img" alt="Logo image"></div>
+            </a>
+            <div class="navbar-brand">
+                <a href="/products"><H1>Bananaphone</H1></a>
             </div>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <ul class="navbar-nav float-right">
+                    <#if login??>
+                    <li class="nav-item">
+                        <a data-toggle="modal" href="#addNewProduct" data-target="#addNewProduct">Add new
+                            product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/products">Cart</a>
+                    </li>
+                    <li class="nav-item"><a href="/logout">Log out</a></li>
+                    <#else>
+                    <li class="nav-item">
+                        <a data-toggle="modal" href="#signIn" data-target="#signIn">Sign in/ Sign up</a>
+                    </li>
+                </#if>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <#if login??>
-                        <li class="nav-item">
-                            <a data-toggle="modal" href="#addNewProduct" data-target="#addNewProduct">Add new
-                                product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/products">Cart</a>
-                        </li>
-                        <li class="nav-item"><a href="/logout">Log out</a></li>
-                        <#else>
-                        <li class="nav-item">
-                            <a data-toggle="modal" href="#signIn" data-target="#signIn">Sign in/ Sign up</a>
-                        </li>
-                    </#if>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-                    </ul>
 
-                </div>
-            </nav>
-        </div><!-- .container -->
-    </nav><!-- #header-nav -->
 </header>
 
 <!--main-content-->

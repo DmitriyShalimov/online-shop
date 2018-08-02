@@ -9,11 +9,15 @@ public class DefaultUserService implements UserService {
     private UserDao userDao;
 
     public void add(User user) {
-        userDao.add(user);
+        String password = "!1Qq" + user.getPassword().hashCode() + "(9Pp";
+        userDao.add(user.getLogin(), password);
     }
 
     public User authenticate(String name, String password) {
-        return userDao.get(name,password);
+        String expectedPassword = "!1Qq" + password.hashCode() + "(9Pp";
+        User user = userDao.get(name, expectedPassword);
+        user.setPassword(null);
+        return user;
     }
 
     public void setUserDao(UserDao userDao) {

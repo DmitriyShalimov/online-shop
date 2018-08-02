@@ -37,27 +37,27 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public void add(User user) {
+    public void add(String login, String password) {
         logger.info("start of the new user's upload to the database");
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_USER_SQL)) {
-            preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("SQL exception while adding new user. {} {}", user, e);
+            logger.error("SQL exception while adding new user with login {}.  {}", login, e);
             throw new RuntimeException("SQL exception while adding new user", e);
         }
     }
 
     @Override
-    public User get(String name, String password) {
+    public User get(String login, String password) {
         logger.info("start receiving a user by name and password");
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_BY_NAME_AND_PASSWORD)) {
-            preparedStatement.setString(1,name);
-            preparedStatement.setString(2,password);
-            ResultSet resultSet=preparedStatement.executeQuery();
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             return USER_ROW_MAPPER.mapRow(resultSet);
         } catch (SQLException e) {

@@ -17,7 +17,7 @@ public class PageGenerator {
     }
 
     public String getPage(WebContext context, String name) {
-        return templateEngine.;
+        return templateEngine.process(name, context);
     }
 
     private PageGenerator() {

@@ -142,7 +142,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav float-right">
-
                 <li class="nav-item"th:if=${login}>
                     <a data-toggle="modal" href="#addNewProduct" data-target="#addNewProduct">Add new
                         product</a>
@@ -152,11 +151,9 @@
                 </li>
                 <li class="nav-item"th:if=${login}><a href="/logout">Log out</a></li>
 
-                <li class="nav-item"th:if!=${login}>
+                <li class="nav-item"th:unless=${login}>
                     <a data-toggle="modal" href="#signIn" data-target="#signIn">Sign in/ Sign up</a>
                 </li>
-
-
             </ul>
         </div>
         </div>

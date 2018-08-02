@@ -1,20 +1,13 @@
 package com.shalimov.onlineshop.web.templater;
 
-import freemarker.cache.ClassTemplateLoader;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Collections;
-import java.util.Map;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 public class PageGenerator {
-    private static final String HTML_DIR = "templates/onlineshop/";
     private static PageGenerator pageGenerator;
-    private final Configuration configuration;
+    private final TemplateEngine templateEngine;
 
     public static PageGenerator instance() {
         if (pageGenerator == null) {
@@ -23,24 +16,16 @@ public class PageGenerator {
         return pageGenerator;
     }
 
-    public String getPage(String filename, Map<String, Object> data) {
-        Writer stream = new StringWriter();
-        try {
-          ClassTemplateLoader templateLoader = new ClassTemplateLoader(getClass(), "/webapp");
-            configuration.setTemplateLoader(templateLoader);
-            Template template = configuration.getTemplate(filename);
-            template.process(data, stream);
-        } catch (IOException | TemplateException e) {
-            throw new RuntimeException(e);
-        }
-        return stream.toString();
+    public String getPage(WebContext context, String name) {
+        return templateEngine.;
     }
 
     private PageGenerator() {
-        configuration = new Configuration();
-    }
-
-    public String getPage(String filename) {
-        return getPage(filename, Collections.emptyMap());
+        templateEngine = new TemplateEngine();
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+        templateResolver.setPrefix("/webapp/");
+        templateResolver.setSuffix(".html");
+        templateEngine.setTemplateResolver(templateResolver);
     }
 }

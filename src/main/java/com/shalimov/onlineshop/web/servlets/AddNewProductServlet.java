@@ -1,6 +1,5 @@
 package com.shalimov.onlineshop.web.servlets;
 
-import com.shalimov.onlineshop.util.Context;
 import com.shalimov.onlineshop.entity.Product;
 import com.shalimov.onlineshop.service.ProductService;
 
@@ -10,8 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AddNewProductServlet extends HttpServlet {
-    private ProductService productService = (ProductService) Context.instance().getApplicationContext().getBean("productService");
-
+    private ProductService productService;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -19,9 +17,6 @@ public class AddNewProductServlet extends HttpServlet {
         String price = request.getParameter("price");
         String description = request.getParameter("description");
         String image = request.getParameter("image");
-        if (image == null) {
-            image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGvElxELn-hVBEc3LYWfWBZQrTpYUxfsqUtoyLYI5tGxromDEy";
-        }
         response.setContentType("text/html;charset=utf-8");
         if (title == null || price == null || description == null) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -35,5 +30,9 @@ public class AddNewProductServlet extends HttpServlet {
             productService.add(product);
         }
         response.sendRedirect("/products");
+    }
+
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
     }
 }

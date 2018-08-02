@@ -1,37 +1,29 @@
 package com.shalimov.onlineshop.security;
 
-import javax.servlet.http.Cookie;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class SecurityService {
     private List<Session> sessions = new ArrayList<>();
 
-    public boolean isValid(Cookie cookie) {
-        Session sessionToDelete = null;
-        for (Session session : sessions) {
-            if (cookie.getValue().equals(session.getToken())) {
-                LocalDateTime expireTime = session.getExpireTime();
-                Duration interval = Duration.between(LocalDateTime.now(), expireTime);
-                if (!interval.isNegative()) {
-                    return true;
-                } else {
-                    sessionToDelete = session;
-                    break;
-                }
-            }
-        }
-        if (sessionToDelete != null) {
-            sessions.remove(sessionToDelete);
-        }
-        return false;
+    public boolean isValid(String token) {
+        return getSession(token) != null;
     }
 
     public Session getSession(String token) {
-        for (Session session : sessions) {
-            if (token.equals(session.getToken()))
-                return session;
+        LocalDateTime now = LocalDateTime.now();
+        Iterator<Session> iterator = sessions.iterator();
+        while (iterator.hasNext()) {
+            Session session = iterator.next();
+            if (token.equals(session.getToken())) {
+                LocalDateTime expireTime = session.getExpireTime();
+                if (now.isBefore(expireTime)) {
+                    return session;
+                } else {
+                    iterator.remove();
+                    break;
+                }
+            }
         }
         return null;
     }

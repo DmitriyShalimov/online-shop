@@ -14,8 +14,9 @@ import java.util.List;
 public class JdbcProductDao implements ProductDao {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private static final ProductRowMapper PRODUCT_ROW_MAPPER = new ProductRowMapper();
-    private static final String GET_ALL_PRODUCTS_SQL = "SELECT p.id, p.title, p.Price, p.description,p.image FROM \"product\" AS p";
+    private static final String GET_ALL_PRODUCTS_SQL = "SELECT id, title, price, description,image FROM \"product\" ";
     private static final String ADD_NEW_PRODUCT_SQL = "INSERT INTO \"product\" (title,description,price,image) VALUES(?,?,?,?);";
+    private static final String DEFAULT_IMAGE="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGvElxELn-hVBEc3LYWfWBZQrTpYUxfsqUtoyLYI5tGxromDEy";
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
@@ -23,7 +24,7 @@ public class JdbcProductDao implements ProductDao {
     }
 
     public List<Product> getAll() {
-        logger.info("start method getAll");
+        logger.info("start getting all products from the database");
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(GET_ALL_PRODUCTS_SQL)) {
@@ -40,17 +41,22 @@ public class JdbcProductDao implements ProductDao {
 
     @Override
     public void add(Product product) {
-        logger.info("start method addProduct");
+        logger.info("Start of the new product's upload to the database");
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_PRODUCT_SQL)) {
             preparedStatement.setString(1, product.getTitle());
             preparedStatement.setString(2, product.getDescription());
             preparedStatement.setDouble(3, product.getPrice());
-            preparedStatement.setString(4, product.getImage());
+            if(product.getImage()!=null){
+                preparedStatement.setString(4, product.getImage());
+            }
+            else{
+                preparedStatement.setString(4, DEFAULT_IMAGE);
+            }
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            logger.error("SQL exception while adding new product. {}", product, e);
-            throw new RuntimeException(e);
+            logger.error("SQL exception while adding new product. {}  {}", product, e);
+            throw new RuntimeException("SQL exception while adding new product",e);
         }
     }
 }

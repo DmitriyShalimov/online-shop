@@ -8,20 +8,15 @@ public class DefaultUserService implements UserService {
 
     private UserDao userDao;
 
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
     public void add(User user) {
         userDao.add(user);
     }
 
     public User authenticate(String name, String password) {
-        for (User user : userDao.getAll()) {
-            if (user.getLogin().equals(name) && user.getPassword().equals(password)) {
-                return user;
-            }
-        }
-        return null;
+        return userDao.get(name,password);
+    }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
     }
 }

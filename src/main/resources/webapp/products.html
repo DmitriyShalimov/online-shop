@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,10 +21,10 @@
 
         /*Header*/
 
-       .navbar {
+        .navbar {
             background-color: #f6b319;
         }
-     
+
         #logo-img {
             background: url("http://erundit.ru/avatar/150/245.gif") no-repeat;
             width: 150px;
@@ -64,6 +64,7 @@
             text-align: center;
             color: #61122f;
             text-decoration: none;
+            font-size: 1.2em;
         }
 
         /*main content*/
@@ -140,44 +141,45 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <ul class="navbar-nav float-right">
-                    <#if login??>
-                    <li class="nav-item">
-                        <a data-toggle="modal" href="#addNewProduct" data-target="#addNewProduct">Add new
-                            product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/products">Cart</a>
-                    </li>
-                    <li class="nav-item"><a href="/logout">Log out</a></li>
-                    <#else>
-                    <li class="nav-item">
-                        <a data-toggle="modal" href="#signIn" data-target="#signIn">Sign in/ Sign up</a>
-                    </li>
-                </#if>
+            <ul class="navbar-nav float-right">
 
-                </ul>
-            </div>
+                <li class="nav-item"th:if=${login}>
+                    <a data-toggle="modal" href="#addNewProduct" data-target="#addNewProduct">Add new
+                        product</a>
+                </li>
+                <li class="nav-item" th:if=${login}>
+                    <a href="/products">Cart</a>
+                </li>
+                <li class="nav-item"th:if=${login}><a href="/logout">Log out</a></li>
+
+                <li class="nav-item"th:if!=${login}>
+                    <a data-toggle="modal" href="#signIn" data-target="#signIn">Sign in/ Sign up</a>
+                </li>
+
+
+            </ul>
+        </div>
         </div>
     </nav>
 
 
 </header>
 
+
 <!--main-content-->
 <div id="main-content" class="container">
     <h2 id="phone-models-title" class="text-center">Models</h2>
     <section class="row">
-        <#list products as product>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-12 ">
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12 " th:each="product : ${products}">
             <div class="phone-tile">
-                <div>$${product.price}</div>
-                <img width="200" height="200" src=${product.image}>
-                <span>${product.title}</span>
+                <div th:text="@{$}+${product.price}">$price</div>
+                <img width="200" height="200" th:src=${product.image}>
+                <span th:text=${product.title}>title</span>
 
             </div>
         </div>
-    </#list>
+
     </section>
 
 </div><!-- End of #main-content -->

@@ -10,10 +10,6 @@ public class DefaultProductService implements ProductService {
 
     private ProductDao productDao;
 
-    public void setProductDao(ProductDao productDao) {
-        this.productDao = productDao;
-    }
-
     @Override
     public List<Product> getAll() {
         return productDao.getAll();
@@ -22,5 +18,9 @@ public class DefaultProductService implements ProductService {
     @Override
     public void add(Product product) {
         productDao.add(product);
+    }
+
+    public void setProductDao(ProductDao productDao) {
+        this.productDao = productDao;
     }
 }

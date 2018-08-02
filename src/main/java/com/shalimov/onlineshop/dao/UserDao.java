@@ -9,4 +9,5 @@ public interface UserDao {
     List<User> getAll();
 
     void add(User user);
+    User get(String name,String password);
 }

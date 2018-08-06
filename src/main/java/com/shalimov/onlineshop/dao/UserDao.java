@@ -4,7 +4,7 @@ import com.shalimov.onlineshop.entity.User;
 
 public interface UserDao {
 
+    void add(User user);
 
-    void add(String login,String password);
-    User get(String login,String password);
+    User get(String login);
 }

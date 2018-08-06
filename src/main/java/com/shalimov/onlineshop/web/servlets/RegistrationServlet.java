@@ -1,9 +1,8 @@
 package com.shalimov.onlineshop.web.servlets;
 
 import com.shalimov.onlineshop.entity.User;
-import com.shalimov.onlineshop.security.Session;
 import com.shalimov.onlineshop.security.SecurityService;
-import com.shalimov.onlineshop.service.UserService;
+import com.shalimov.onlineshop.security.Session;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -14,15 +13,15 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class RegistrationServlet extends HttpServlet {
-    private UserService userService;
+
     private SecurityService securityService;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String name = request.getParameter("registrationName");
+        String login = request.getParameter("registrationName");
         String password = request.getParameter("registrationPassword");
-        User user = new User(name, password);
-        userService.add(user);
+        User user = new User(login, password);
+        securityService.add(user);
         String token = UUID.randomUUID().toString();
         Session session = new Session();
         session.setUser(user);
@@ -33,10 +32,6 @@ public class RegistrationServlet extends HttpServlet {
         cookie.setMaxAge(3600);
         response.addCookie(cookie);
         response.sendRedirect("/products");
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
     }
 
     public void setSecurityService(SecurityService securityService) {

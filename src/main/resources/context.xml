@@ -1,8 +1,8 @@
 <beans>
     <bean id="dataSource" class="org.postgresql.jdbc2.optional.PoolingDataSource">
-        <property name="password" value="qwerty"/>
-        <property name="databaseName" value="online-shop"/>
-        <property name="user" value="postgres"/>
+        <property name="password" value="${password}"/>
+        <property name="databaseName" value="${databaseName}"/>
+        <property name="user" value="${user}"/>
     </bean>
 
     <bean id="productDao" class="com.shalimov.onlineshop.dao.jdbc.JdbcProductDao">
@@ -14,6 +14,7 @@
     </bean>
 
     <bean id="securityService" class="com.shalimov.onlineshop.security.SecurityService">
+        <property name="userService" ref="userService"/>
     </bean>
 
     <bean id="productService" class="com.shalimov.onlineshop.service.impl.DefaultProductService">
@@ -22,5 +23,7 @@
 
     <bean id="userService" class="com.shalimov.onlineshop.service.impl.DefaultUserService">
         <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="propertyPlaceholder" class="com.shalimov.onlineshop.beanfactorypostprocessor.PropertyPlaceholder">
     </bean>
 </beans>

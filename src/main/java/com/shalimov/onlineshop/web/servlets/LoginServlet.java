@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
-        User user = userService.authenticate(name, password);
+        User user = securityService.authenticate(name, password);
         if (user != null) {
             String token = UUID.randomUUID().toString();
             Session session = new Session();

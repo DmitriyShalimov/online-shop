@@ -8,9 +8,9 @@ import java.sql.SQLException;
 public class UserRowMapper {
     public User mapRow(ResultSet resultSet) throws SQLException {
         User user = new User();
-        user.setId(resultSet.getInt("id"));
         user.setLogin(resultSet.getString("login"));
         user.setPassword(resultSet.getString("password"));
+        user.setSalt(resultSet.getString("salt"));
         return user;
     }
 }

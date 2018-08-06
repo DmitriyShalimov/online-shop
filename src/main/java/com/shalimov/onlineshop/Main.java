@@ -42,7 +42,6 @@ public class Main {
         context.addServlet(new ServletHolder(logoutServlet), "/logout");
         RegistrationServlet registrationServlet = new RegistrationServlet();
         registrationServlet.setSecurityService(securityService);
-        registrationServlet.setUserService(userService);
         context.addServlet(new ServletHolder(registrationServlet), "/registration");
 
         EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST);

@@ -1,5 +1,6 @@
 package com.shalimov.onlineshop.web.servlets;
 
+import com.shalimov.onlineshop.ServiceLocator;
 import com.shalimov.onlineshop.security.Session;
 import com.shalimov.onlineshop.security.SecurityService;
 import com.shalimov.onlineshop.web.templater.PageGenerator;
@@ -18,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductsServlet extends HttpServlet {
-    private SecurityService securityService;
-    private ProductService productService;
+    private SecurityService securityService= (SecurityService) ServiceLocator.getService("securityService");
+    private ProductService productService= (ProductService) ServiceLocator.getService("productService");
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -40,13 +41,4 @@ public class ProductsServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
     }
-
-    public void setSecurityService(SecurityService securityService) {
-        this.securityService = securityService;
-    }
-
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
-
 }

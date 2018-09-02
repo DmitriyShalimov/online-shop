@@ -1,5 +1,6 @@
 package com.shalimov.onlineshop.web.security;
 
+import com.shalimov.onlineshop.ServiceLocator;
 import com.shalimov.onlineshop.security.SecurityService;
 import com.shalimov.onlineshop.web.util.Util;
 
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SecurityFilter implements Filter {
-    private SecurityService securityService;
+    private SecurityService securityService= (SecurityService) ServiceLocator.getService("securityService");
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -28,7 +29,7 @@ public class SecurityFilter implements Filter {
         if (isAuth) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            httpServletResponse.sendRedirect("/products");
+            httpServletResponse.sendRedirect("/lots");
         }
     }
 
@@ -38,9 +39,5 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void destroy() {
-    }
-
-    public void setSecurityService(SecurityService securityService) {
-        this.securityService = securityService;
     }
 }

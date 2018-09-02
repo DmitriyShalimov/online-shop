@@ -1,6 +1,8 @@
 package com.shalimov.onlineshop.web.servlets;
 
+import com.shalimov.onlineshop.ServiceLocator;
 import com.shalimov.onlineshop.security.SecurityService;
+import com.shalimov.onlineshop.service.UserService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class LogoutServlet extends HttpServlet {
-    private SecurityService securityService;
+    private SecurityService securityService= (SecurityService) ServiceLocator.getService("securityService");
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -23,9 +25,5 @@ public class LogoutServlet extends HttpServlet {
         cookie.setMaxAge(0);
         response.addCookie(cookie);
         response.sendRedirect("/products");
-    }
-
-    public void setSecurityService(SecurityService securityService) {
-        this.securityService = securityService;
     }
 }

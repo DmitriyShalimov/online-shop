@@ -5,9 +5,8 @@ import com.shalimov.onlineshop.entity.Product;
 import com.shalimov.onlineshop.service.ProductService;
 
 import java.util.List;
-
 public class DefaultProductService implements ProductService {
-
+    private static final String DEFAULT_IMAGE = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGvElxELn-hVBEc3LYWfWBZQrTpYUxfsqUtoyLYI5tGxromDEy";
     private ProductDao productDao;
 
     @Override
@@ -17,6 +16,9 @@ public class DefaultProductService implements ProductService {
 
     @Override
     public void add(Product product) {
+        if (product.getImage() == null) {
+            product.setImage(DEFAULT_IMAGE);
+        }
         productDao.add(product);
     }
 

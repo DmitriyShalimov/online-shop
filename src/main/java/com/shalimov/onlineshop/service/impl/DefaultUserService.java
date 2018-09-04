@@ -5,7 +5,6 @@ import com.shalimov.onlineshop.entity.User;
 import com.shalimov.onlineshop.service.UserService;
 
 public class DefaultUserService implements UserService {
-
     private UserDao userDao;
 
     public void add(User user) {
